@@ -48,6 +48,7 @@ const Login = () => {
             dispatch(setLoading(false));
         }
     }
+    console.log(input);
     useEffect(()=>{
         if(user){
             navigate("/");
