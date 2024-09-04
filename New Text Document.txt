@@ -1,0 +1,4 @@
+.env
+1)Mongodb url  :32:44
+2)Port         :33:30
+3)secret Key    : 1:05
