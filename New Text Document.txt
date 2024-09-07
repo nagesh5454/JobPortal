@@ -2,6 +2,7 @@
 (1)Mongodb url  :32:44
 (2)Port         :33:30
 (3)secret Key    : 1:05
+(4)cloud name , api , secret : 7:17:00
 
 
  Day 1 : 04- 09 - 2024     till  5:20:39
@@ -9,3 +10,12 @@
 
 start frontend : npm run dev
 start backend  : npm run dev
+
+
+
+User:
+account 1 
+nageshmane446@gmail.com      nagesh123
+
+Recruter:
+account 1 
