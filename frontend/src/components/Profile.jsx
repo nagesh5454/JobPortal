@@ -9,7 +9,7 @@ import AppliedJobTable from './AppliedJobTable'
 import UpdateProfileDialog from './UpdateProfileDialog'
 import { useSelector } from 'react-redux'
 import useGetAppliedJobs from '@/hooks/useGetAppliedJobs'
-
+//Resume
 // const skills = ["Html", "Css", "Javascript", "Reactjs"]
 const isResume = true;
 
