@@ -1,6 +1,7 @@
 import { Application } from "../models/application.model.js";
 import { Job } from "../models/job.model.js";
 
+//Apply Job
 export const applyJob = async (req, res) => {
     try {
         const userId = req.id;
@@ -45,6 +46,7 @@ export const applyJob = async (req, res) => {
         console.log(error);
     }
 };
+//Get Applied Jobs 
 export const getAppliedJobs = async (req,res) => {
     try {
         const userId = req.id;
@@ -95,6 +97,7 @@ export const getApplicants = async (req,res) => {
         console.log(error);
     }
 }
+//update status
 export const updateStatus = async (req,res) => {
     try {
         const {status} = req.body;
