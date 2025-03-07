@@ -9,6 +9,8 @@ import jobRoute from "./routes/job.route.js";
 import applicationRoute from "./routes/application.route.js";
 import path from "path";
 dotenv.config({});
+import emailRoutes from './routes/emailRoutes.js';
+
 
 const app = express();
 const _dirname=path.resolve();
@@ -32,7 +34,7 @@ app.use("/api/v1/user", userRoute);  //http://localhost:8000/api/v1/user
 app.use("/api/v1/company", companyRoute);  //http://localhost:8000/api/v1/company
 app.use("/api/v1/job", jobRoute);    //http://localhost:8000/api/v1/job
 app.use("/api/v1/application", applicationRoute); //http://localhost:8000/api/v1/application
-
+app.use('/api/email', emailRoutes);
 
 
 app.use(express.static(path.join(_dirname,"/frontend/dist")));
