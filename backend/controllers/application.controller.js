@@ -309,6 +309,3 @@ export const updateStatus = async (req, res) => {
         res.status(500).json({ message: "Server error", success: false });
     }
 };
-
-
-

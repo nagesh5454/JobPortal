@@ -1,8 +1,10 @@
 import { User } from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import jwt from "jsonwebtoken";
+import crypto from "crypto";
 import getDataUri from "../utils/datauri.js";
 import cloudinary from "../utils/cloudinary.js";
+import sendEmail from "../utils/sendEmail.js"; // Function to send emails
 
 //user Register
 export const register = async (req, res) => {
@@ -174,3 +176,70 @@ export const updateProfile = async (req, res) => {
         console.log(error);
     }
 }
+
+
+
+// 🟢 Forgot Password (Generate Reset Token)
+export const forgotPassword = async (req, res) => {
+    try {
+        const { email } = req.body;
+        if (!email) {
+            return res.status(400).json({ message: "Email is required", success: false });
+        }
+
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(400).json({ message: "User not found", success: false });
+        }
+
+        // Generate reset token
+        user.generateResetToken();
+        await user.save();
+
+        const resetLink = `${process.env.FRONTEND_URL}/reset-password/${user.resetToken}`;
+
+        // Send email
+        await sendEmail(email, "Password Reset Request", `Click the link to reset your password: ${resetLink}`);
+
+        return res.status(200).json({
+            message: "Password reset link sent to your email.",
+            success: true
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error", success: false });
+    }
+};
+
+// 🟢 Reset Password
+export const resetPassword = async (req, res) => {
+    try {
+        const { token, newPassword } = req.body;
+
+        if (!token || !newPassword) {
+            return res.status(400).json({ message: "All fields are required", success: false });
+        }
+
+        const user = await User.findOne({ resetToken: token, resetTokenExpiry: { $gt: Date.now() } });
+
+        if (!user) {
+            return res.status(400).json({ message: "Invalid or expired token", success: false });
+        }
+
+        // Update password
+        user.password = await bcrypt.hash(newPassword, 10);
+        user.resetToken = undefined;
+        user.resetTokenExpiry = undefined;
+        await user.save();
+
+        return res.status(200).json({
+            message: "Password reset successful. You can now log in.",
+            success: true
+        });
+
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ message: "Server error", success: false });
+    }
+};
