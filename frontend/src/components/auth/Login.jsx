@@ -88,9 +88,9 @@ const Login = () => {
                         />
                     </div>
 
-                    {/* Forgot Password - Fixed Position */}
+                    {/* Forgot Password Link */}
                     <div className="flex justify-end">
-                        <Link to="/reset-password" className="text-blue-600 text-sm font-medium hover:underline">
+                        <Link to="/forgot-password" className="text-blue-600 text-sm font-medium hover:underline">
                             Forgot Password?
                         </Link>
                     </div>
@@ -127,7 +127,11 @@ const Login = () => {
                     </div>
 
                     {/* Login Button */}
-                    <Button type="submit" className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition" disabled={loading}>
+                    <Button
+                        type="submit"
+                        className="w-full mt-4 bg-blue-600 hover:bg-blue-700 text-white py-2 rounded-md transition"
+                        disabled={loading}
+                    >
                         {loading ? (
                             <>
                                 <Loader2 className="mr-2 h-4 w-4 animate-spin" /> Please wait...
@@ -153,3 +157,4 @@ const Login = () => {
 };
 
 export default Login;
+
